@@ -1,135 +1,112 @@
-# healthcore-smartbridge
-
-A comprehensive healthcare platform integration tool that bridges smart health devices with clinical data management systems.
+# API Documentation
 
 ## Overview
+This document provides comprehensive details about the API endpoints available for the HealthCore SmartBridge application. Each section outlines the necessary endpoints for different user roles—admin, doctor, and patient—and includes examples of requests and responses.
 
-HealthCore SmartBridge is designed to streamline healthcare data collection and integration from various smart health devices and wearables, providing a centralized platform for health data management and analytics.
+## Authentication
+All API requests require authentication. You must include a bearer token in the header of each request to access protected resources.
 
-## Features
-
-- 🔗 **Device Integration** - Connect and sync data from multiple smart health devices
-- 📊 **Data Analytics** - Real-time health metrics analysis and insights
-- 🔐 **Secure Data Handling** - HIPAA-compliant data storage and transmission
-- 📱 **React Frontend** - Modern, responsive user interface built with React and Vite
-- 🚀 **Scalable Backend** - Robust backend infrastructure for data processing
-- 📈 **Monitoring & Reporting** - Comprehensive health reports and visualizations
-
-## Project Structure
-
+### Example:
 ```
-healthcore-smartbridge/
-├── Client/              # React + Vite frontend application
-├── Server/              # Backend API and services
-├── Database/            # Database schemas and migrations
-└── README.md            # Project documentation
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-## Tech Stack
+## Doctor Endpoints
 
-### Frontend
-- React 18
-- Vite
-- Modern JavaScript/ES6+
-- ESLint for code quality
+### 1. Get Doctor Information
+- **Endpoint:** `/api/doctors/{id}`  
+- **Method:** GET  
+- **Description:** Fetch the details of a specific doctor.
 
-### Backend
-- Node.js
-- Express.js (or your backend framework)
-- RESTful API architecture
-
-### Database
-- Your database system here
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn package manager
-- Git
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/Fahad035/healthcore-smartbridge.git
-cd healthcore-smartbridge
+#### Request:
+```
+GET /api/doctors/1
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-2. Install frontend dependencies:
-```bash
-cd Client
-npm install
+#### Response:
+```json
+{
+    "id": 1,
+    "name": "Dr. John Doe",
+    "specialty": "Cardiology",
+    "contact": "123-456-7890"
+}
 ```
 
-3. Install backend dependencies (if applicable):
-```bash
-cd ../Server
-npm install
+### 2. Update Doctor Details
+- **Endpoint:** `/api/doctors/{id}`  
+- **Method:** PUT  
+- **Description:** Update the information of a doctor.
+
+#### Request:
+```
+PUT /api/doctors/1
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Content-Type: application/json
+
+{
+    "name": "Dr. John Smith",
+    "specialty": "Pediatrics"
+}
 ```
 
-### Running the Application
-
-**Frontend (Development):**
-```bash
-cd Client
-npm run dev
+#### Response:
+```json
+{
+    "message": "Doctor updated successfully."
+}
 ```
 
-**Backend (Development):**
-```bash
-cd Server
-npm run dev
+## Patient Endpoints
+
+### 1. Get Patient Information
+- **Endpoint:** `/api/patients/{id}`  
+- **Method:** GET  
+- **Description:** Retrieve patient information by ID.
+
+### Example:
+```
+GET /api/patients/1
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-## Development
+### Response:
+```json
+{
+    "id": 1,
+    "name": "Jane Doe",
+    "dob": "1990-01-01",
+    "contact": "987-654-3210"
+}
+```
 
-### Frontend Development
-The frontend uses Vite for fast development and hot module reloading (HMR). Two official plugins are available:
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) using Oxc
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) using SWC
+## Admin Endpoints
 
-### Code Quality
-ESLint is configured for code quality checks. For production applications, TypeScript with type-aware lint rules is recommended.
+### 1. Create New Doctor
+- **Endpoint:** `/api/admin/doctors`  
+- **Method:** POST  
+- **Description:** Add a new doctor to the system.
 
-## API Documentation
+#### Request:
+```
+POST /api/admin/doctors
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Content-Type: application/json
 
-[Add your API endpoints documentation here]
+{
+    "name": "Dr. Emily Brown",
+    "specialty": "Dermatology",
+    "contact": "555-123-4567"
+}
+```
 
-## Contributing
+#### Response:
+```json
+{
+    "message": "Doctor created successfully."
+}
+```
 
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## Security
-
-- All health data is encrypted in transit and at rest
-- HIPAA compliance standards are maintained
-- Regular security audits are conducted
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For support, please open an issue on GitHub or contact the development team.
-
-## Authors
-
-- **Fahad035** - Initial work
-
-## Acknowledgments
-
-- React and Vite communities
-- All contributors and users of this project
-
----
-
-**Last Updated:** 2026-04-01 10:56:03
+## Summary
+This document provides the necessary details for utilizing the HealthCore SmartBridge API. Ensure you replace placeholder tokens and IDs with actual values for successful requests.
