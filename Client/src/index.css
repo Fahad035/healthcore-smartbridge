@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&family=Sora:wght@500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Public Sans', 'Segoe UI', sans-serif;
+  background: #f6f9fc;
+  color: #1d2a36;
+}
+
+a {
+  color: #0a58ca;
+}
