@@ -1,112 +1,60 @@
 # API Documentation
 
-## Overview
-This document provides comprehensive details about the API endpoints available for the HealthCore SmartBridge application. Each section outlines the necessary endpoints for different user roles—admin, doctor, and patient—and includes examples of requests and responses.
-
 ## Authentication
-All API requests require authentication. You must include a bearer token in the header of each request to access protected resources.
-
-### Example:
+To access the API, you must provide a valid API key with each request. The API key should be included in the request headers as follows:
 ```
-Authorization: Bearer YOUR_ACCESS_TOKEN
+Authorization: Bearer YOUR_API_KEY
 ```
 
 ## Doctor Endpoints
 
-### 1. Get Doctor Information
-- **Endpoint:** `/api/doctors/{id}`  
-- **Method:** GET  
-- **Description:** Fetch the details of a specific doctor.
+### Get All Doctors
+- **Endpoint:** `/api/doctors`
+- **Method:** GET
+- **Request:** No parameters required.
+- **Response:** A JSON array of doctor objects.
 
-#### Request:
-```
-GET /api/doctors/1
-Authorization: Bearer YOUR_ACCESS_TOKEN
-```
-
-#### Response:
-```json
-{
-    "id": 1,
-    "name": "Dr. John Doe",
-    "specialty": "Cardiology",
-    "contact": "123-456-7890"
-}
-```
-
-### 2. Update Doctor Details
-- **Endpoint:** `/api/doctors/{id}`  
-- **Method:** PUT  
-- **Description:** Update the information of a doctor.
-
-#### Request:
-```
-PUT /api/doctors/1
-Authorization: Bearer YOUR_ACCESS_TOKEN
-Content-Type: application/json
-
-{
-    "name": "Dr. John Smith",
-    "specialty": "Pediatrics"
-}
-```
-
-#### Response:
-```json
-{
-    "message": "Doctor updated successfully."
-}
-```
+### Get Doctor By ID
+- **Endpoint:** `/api/doctors/{id}`
+- **Method:** GET
+- **Parameters:**
+  - **id** (integer): The ID of the doctor.
+- **Response:** A JSON object with the doctor's details.
 
 ## Patient Endpoints
 
-### 1. Get Patient Information
-- **Endpoint:** `/api/patients/{id}`  
-- **Method:** GET  
-- **Description:** Retrieve patient information by ID.
+### Get All Patients
+- **Endpoint:** `/api/patients`
+- **Method:** GET
+- **Request:** No parameters required.
+- **Response:** A JSON array of patient objects.
 
-### Example:
-```
-GET /api/patients/1
-Authorization: Bearer YOUR_ACCESS_TOKEN
-```
-
-### Response:
-```json
-{
-    "id": 1,
-    "name": "Jane Doe",
-    "dob": "1990-01-01",
-    "contact": "987-654-3210"
-}
-```
+### Get Patient By ID
+- **Endpoint:** `/api/patients/{id}`
+- **Method:** GET
+- **Parameters:**
+  - **id** (integer): The ID of the patient.
+- **Response:** A JSON object with the patient's details.
 
 ## Admin Endpoints
 
-### 1. Create New Doctor
-- **Endpoint:** `/api/admin/doctors`  
-- **Method:** POST  
-- **Description:** Add a new doctor to the system.
+### Get All Users
+- **Endpoint:** `/api/admin/users`
+- **Method:** GET
+- **Request:** No parameters required.
+- **Response:** A JSON array of user objects.
 
-#### Request:
-```
-POST /api/admin/doctors
-Authorization: Bearer YOUR_ACCESS_TOKEN
-Content-Type: application/json
+## Error Responses
+Common error responses include:
+- **400 Bad Request:** The request was invalid. Check the parameters and try again.
+- **401 Unauthorized:** Authentication failed. Ensure your API key is correct.
+- **404 Not Found:** The requested resource could not be found.
+- **500 Internal Server Error:** An error occurred on the server.
 
-{
-    "name": "Dr. Emily Brown",
-    "specialty": "Dermatology",
-    "contact": "555-123-4567"
-}
-```
+## Rate Limiting
+The API enforces rate limiting to ensure fair usage. The following limits apply:
+- **Requests per minute:** 100
+- **Requests per hour:** 1000
 
-#### Response:
-```json
-{
-    "message": "Doctor created successfully."
-}
-```
-
-## Summary
-This document provides the necessary details for utilizing the HealthCore SmartBridge API. Ensure you replace placeholder tokens and IDs with actual values for successful requests.
+## Endpoint Details
+Each endpoint can return successful and error responses, as outlined above. Ensure to handle both response types accordingly in your implementation.
